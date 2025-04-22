@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 font-medium transition-colors rounded focus:outline-none;
+    
+    /* Variants */
+    &.btn-primary {
+      @apply text-white bg-blue-600 hover:bg-blue-700;
+    }
+    
+    &.btn-secondary {
+      @apply text-gray-900 bg-gray-200 hover:bg-gray-300;
+    }
+    
+    &.btn-outline {
+      @apply text-gray-900 border border-gray-200 hover:bg-gray-100;
+    }
+
+
+    /* Sizes */
+    &.btn-sm {
+      @apply px-3 py-1.5 text-sm;
+    }
+    
+    &.btn-md {
+      @apply px-4 py-2 text-base;
+    }
+    
+    &.btn-lg {
+      @apply px-6 py-3 text-lg;
+    }
+  }
+}
