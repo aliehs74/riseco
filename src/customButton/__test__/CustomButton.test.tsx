@@ -1,39 +1,39 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'; 
-import CustomButton from '..';
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, test, vitest } from "vitest";
+import CustomButton from "..";
+import "tailwindcss";
 
-describe('CustomButton', () => {
+
+describe("CustomButton", () => {
     beforeEach(() => {
-      jest.clearAllMocks();      
+          vitest.clearAllMocks();
     })
-    it('renders correctly', () => {
-      render(<CustomButton title="Click me" />);
-      const button = screen.getByText('Click me');
-      expect(button).toBeTruthy();
+    const label = "buttonLable"
+
+    test("should render CustomButton with second varient", () => {
+        render(<CustomButton label={label} variant="secondary" />);
+        const btn = screen.getByTestId(label);
+
+        expect(btn).toBeInTheDocument();
+        expect(btn).toHaveTextContent(label);
+        expect(btn).toHaveClass("btn btn-secondary");
     });
-  
-    it('ckeck exact variant', () => {
-      render(<CustomButton title="Submit" variant="secondary" />);
-      const button = screen.getByRole('button');
-      expect(button).toHaveClass('btn btn-secondary');
+
+    test("should render CustomButton with lg size", () => {
+        render(<CustomButton label={label} size="lg" variant="outline" />);
+        const btn = screen.getByTestId(label);
+
+        expect(btn).toBeInTheDocument();
+        expect(btn).toHaveTextContent(label);
+        expect(btn).toHaveClass("btn btn-outline btn-lg");
     });
-  
-    it('check additional className', () => {
-      render(<CustomButton title="Test" className="extra-class" />);
-      const button = screen.getByText('Test');
-      expect(button).toHaveClass('extra-class');
+
+    test("should render CustomButton with extra className", () => {
+        render(<CustomButton label={label} className="testClass" />);
+        const btn = screen.getByTestId(label);
+
+        expect(btn).toBeInTheDocument();
+        expect(btn).toHaveTextContent(label);
+        expect(btn).toHaveClass("btn testClass ");
     });
-  
-    it('check size', () => {
-      render(<CustomButton title="Test" size="lg" />);
-      const button = screen.getByText('Test');
-      expect(button).toHaveClass('btn-lg');
-    });
-  
-    it('find element by testid', () => {
-      render(<CustomButton title="Test" data-testid="custom-button" />);
-      const button = screen.getByTestId('custom-button');
-      expect(button).toBeInTheDocument();
-    });
-  });
+});
