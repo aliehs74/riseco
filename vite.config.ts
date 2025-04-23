@@ -1,23 +1,23 @@
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
-import { defineConfig  } from 'vitest/config'
+import { defineConfig } from 'vitest/config'
+import dts from 'vite-plugin-dts'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    dts({ include: ['src'] }) // This generates TypeScript declaration files
   ],
   test: {
     environment: 'happy-dom',
     setupFiles: ['./setup.ts'],
     include: ['src/**/*.{test,spec}.{ts,tsx}']
   },
-  // اضافه کردن تنظیمات بیلد برای حالت لایبرری
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/main.tsx'), // یا 'src/main.tsx' اگر از TS استفاده می‌کنید
+      entry: path.resolve(__dirname, 'src/index.ts'), // Changed from main.tsx to index.ts
       name: 'Riseco',
       fileName: (format) => `riseco.${format}.js`
     },

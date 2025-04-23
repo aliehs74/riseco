@@ -5,14 +5,15 @@
   "type": "module",
   "module": "./dist/riseco.es.js",
   "main": "./dist/riseco.umd.js",
-  "types": "./dist/main.d.ts",
-  "files": ["dist"],
-  
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^4.0.0"
   },
-
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -24,9 +25,9 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tailwindcss": "^4.1.4"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^4.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
@@ -57,11 +58,19 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.1",
+    "vite-plugin-dts": "^4.5.3",
     "vitest": "^3.1.2"
   },
   "eslintConfig": {
     "extends": [
       "plugin:storybook/recommended"
     ]
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/riseco.es.js",
+      "require": "./dist/riseco.umd.js",
+      "types": "./dist/index.d.ts"
+    }
   }
 }
