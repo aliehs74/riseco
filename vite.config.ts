@@ -8,7 +8,11 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    dts({ include: ['src'] }) // This generates TypeScript declaration files
+    dts({
+      include: ['src/**/*.{ts,tsx}'],
+      exclude: ['src/**/*.{test,spec,stories}.{ts,tsx}'],
+      outDir: 'dist'
+    })
   ],
   test: {
     environment: 'happy-dom',
@@ -17,17 +21,24 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'), // Changed from main.tsx to index.ts
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'Riseco',
       fileName: (format) => `riseco.${format}.js`
     },
+    cssCodeSplit: true,
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
         globals: {
           react: 'React',
-          'react-dom': 'ReactDOM'
-        }
+          'react-dom': 'ReactDOM',
+          'react/jsx-runtime': 'jsxRuntime'
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.names.includes('style')) return 'customBtnStyle.css';
+          return assetInfo.names.join(',');
+     },
+  
       }
     }
   }

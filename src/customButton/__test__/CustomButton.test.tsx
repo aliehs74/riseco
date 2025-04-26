@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, test, vitest } from "vitest";
-import CustomButton from "..";
+import CustomButton from "../CustomButton.tsx";
 import "tailwindcss";
 
 

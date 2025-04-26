@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import CustomButton from '..';
+import CustomButton from '../CustomButton.tsx';
 
 const meta = {
   title: 'CustomButton',
